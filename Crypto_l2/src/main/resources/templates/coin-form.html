@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Coin form</title>
+</head>
+<body>
+<h1 th:text="${coin.id == null ? 'Add Coin' : 'Edit Coin'}"></h1>
+<form th:action="@{${coin.id == null ? '/coins/add' : '/coins/edit'}}"
+      th:object="${coin}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    Name: <input th:field="*{name}" required/><br/>
+    Symbol: <input th:field="*{symbol}" required/><br/>
+    Price: <input type="number" th:field="*{priceUsd}" step="any" required/><br/>
+    Market Cap: <input type="number" th:field="*{marketCap}" step="any" required/><br/>
+    <div>
+        <label>Exchanges:</label>
+        <select name="exchangeIds" multiple="multiple">
+            <option th:each="exchange : ${allExchanges}"
+                    th:value="${exchange.id}"
+                    th:text="${exchange.name}"
+                    th:selected="${coin.exchanges != null && coin.exchanges.contains(exchange)}">
+            </option>
+        </select>
+    </div>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>
