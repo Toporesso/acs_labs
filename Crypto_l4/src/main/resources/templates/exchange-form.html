@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Exchange form</title>
+</head>
+<body>
+<h1 th:text="${exchange.id == null ? 'Add Exchange' : 'Edit Exchange'}"></h1>
+<form th:action="@{${exchange.id == null ? '/exchanges/add' : '/exchanges/edit'}}"
+      th:object="${exchange}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    Name: <input th:field="*{name}" required/><br/>
+    Country: <input th:field="*{country}" required/><br/>
+    Website: <input th:field="*{website}" required/><br/>
+    <button type="submit">Save</button>
+</form>
+
+<a th:href="@{/exchanges}">Back to Exchanges List</a>
+</body>
+</html>

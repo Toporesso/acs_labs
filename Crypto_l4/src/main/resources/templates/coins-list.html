@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crypto Coins</title>
+</head>
+<body>
+<h1>Crypto Coins</h1>
+<a th:href="@{/coins/add}">Add Coin</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Symbol</th>
+        <th>Price</th>
+        <th>Market Cap</th>
+        <th>Exchanges</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="coin : ${coins}">
+        <td th:text="${coin.id}"></td>
+        <td th:text="${coin.name}"></td>
+        <td th:text="${coin.symbol}"></td>
+        <td th:text="${coin.priceUsd}"></td>
+        <td th:text="${coin.marketCap}"></td>
+        <td>
+            <span th:each="exchange : ${coin.exchanges}" th:text="${exchange.name} + ', '"></span>
+        </td>
+        <td>
+            <a th:href="@{/coins/edit/{id}(id=${coin.id})}">Edit</a>
+            <a th:href="@{/coins/delete/{id}(id=${coin.id})}">Delete</a>
+        </td>
+    </tr>
+</table>
+<a th:href="@{/exchanges}">Go to Exchanges List</a>
+<a th:href="@{/api/browser}">API</a>
+</body>
+</html>
