@@ -3,9 +3,11 @@
 ### Задание 1
 
 Запуск glassfish:
+
 <img width="1518" height="748" alt="image" src="https://github.com/user-attachments/assets/21bed5c2-e0c4-43cc-a895-58974e367112" />
 
 Панель glassfish:
+
 <img width="1516" height="653" alt="image" src="https://github.com/user-attachments/assets/3d90e13d-7f30-4cf6-a298-e3b75ce90c48" />
 
 ### Задание 2
@@ -13,6 +15,7 @@
 Использовалась postgreSQL
 
 Панель pgAdmin 4:
+
 <img width="1225" height="540" alt="image" src="https://github.com/user-attachments/assets/dd9f7d44-6cc3-4463-972b-d771225d1ae6" />
 
 ### Задание 3
@@ -82,31 +85,45 @@ SELECT 'Exchange-Crypto links: ' || COUNT(*) FROM ExchangeCrypto;
 
 ### Задание 4
 
+Реализованы Java Beans (CryptoCoin, Exchange) с JPA-аннотациями. Настроены связи @ManyToMany через таблицу ExchangeCrypto.
+
 ### Задание 5
 
+Созданы EJB-компоненты CryptoCoinService и ExchangeService с CRUD-операциями. Используется EntityManager для работы с БД.
+
 ### Задание 6
+
+Реализован веб-интерфейс на JSF с Facelets (index.xhtml, exchanges.xhtml). Подключены managed beans для отображения и редактирования данных.
 
 ### Задание 7
 
 Запускаем проект и видим пустые таблицы:
+
 <img width="1089" height="432" alt="image" src="https://github.com/user-attachments/assets/c11465ef-ecda-40a7-acf9-34b1104aee8b" />
+
 <img width="407" height="370" alt="image" src="https://github.com/user-attachments/assets/69e8afce-8773-4772-9c8d-a37d73a8c497" />
 
 Для начала убидимся в правильности работы
 
 Создадим биржу через форму:
+
 <img width="254" height="161" alt="image" src="https://github.com/user-attachments/assets/e9937e3f-ea86-44cb-9a06-7de7457a51dc" />
 
 Получим:
+
 <img width="284" height="121" alt="image" src="https://github.com/user-attachments/assets/96632459-8c18-473c-98af-960d9db9e045" />
 
 Создадим монету через форму:
+
 <img width="359" height="224" alt="image" src="https://github.com/user-attachments/assets/26ba0872-af89-4dfc-80b8-b00b766f19b5" />
 
 Получим:
+
 <img width="1053" height="153" alt="image" src="https://github.com/user-attachments/assets/fb02813a-14d9-42ae-b8c7-87df32f6e232" />
 
 Теперь заполним таблицу через SQL файл и получим:
+
 <img width="1051" height="1290" alt="image" src="https://github.com/user-attachments/assets/26cb8ac1-a848-4485-99ce-c9722a0006f8" />
+
 <img width="347" height="441" alt="image" src="https://github.com/user-attachments/assets/77fc4d75-ece0-4b8a-b95f-aa93b3422c6c" />
 
