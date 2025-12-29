@@ -15,9 +15,13 @@ DELETE /api/coins/{id}  Удаление конкретной валюты
 Тоже самое справедливо и для бирж, для этого в запросах coins меняем на exchanges.
 Можно посмотреть как это работает введя в адресную строку следующие команды:
 http://localhost:8080/api/coins?format=xml Получаем список всех валют в формате XML
+
 <img width="585" height="910" alt="image" src="https://github.com/user-attachments/assets/bef32427-ba76-4c5e-88b5-ce4d95ff19e3" />
+
 http://localhost:8080/api/coins?format=json Получаем список всех валют в формате JSON
+
 <img width="479" height="922" alt="image" src="https://github.com/user-attachments/assets/b2dd0939-1bf3-4fc7-958b-465976063a77" />
+
 Задание 4:
 Разработаны два файла(отдельно для coins и exchanges) для преобразования XML в HTML: coins.xsl и exchanges.xsl.
 Задание 5:
