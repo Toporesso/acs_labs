@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Exchanges</title>
+</head>
+<body>
+<h1>Exchanges</h1>
+<a th:href="@{/exchanges/add}">Add Exchange</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Website</th>
+        <th>Available Coins</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="exchange : ${exchanges}">
+        <td th:text="${exchange.id}"></td>
+        <td th:text="${exchange.name}"></td>
+        <td th:text="${exchange.country}"></td>
+        <td th:text="${exchange.website}"></td>
+        <td>
+            <!-- Проверяем, есть ли у биржи криптовалюты -->
+            <div th:if="${exchange.cryptos != null and not exchange.cryptos.isEmpty()}">
+                <span th:each="coin : ${exchange.cryptos}" th:text="${coin.name} + ' (' + ${coin.symbol} + '), '"></span>
+            </div>
+            <div th:if="${exchange.cryptos == null or exchange.cryptos.isEmpty()}">
+                <em>No coins available</em>
+            </div>
+        </td>
+        <td>
+            <a th:href="@{/exchanges/edit/{id}(id=${exchange.id})}">Edit</a>
+            <a th:href="@{/exchanges/delete/{id}(id=${exchange.id})}">Delete</a>
+        </td>
+    </tr>
+</table>
+<a th:href="@{/coins}">Go to Coins List</a>
+<a th:href="@{/api/browser}">API</a>
+</body>
+</html>
