@@ -29,6 +29,9 @@ TRUNCATE TABLE ExchangeCrypto CASCADE;
 TRUNCATE TABLE Exchange CASCADE;
 TRUNCATE TABLE CryptoCoin CASCADE;
 
+ALTER SEQUENCE IF EXISTS cryptocoin_id_seq RESTART WITH 1;
+ALTER SEQUENCE IF EXISTS exchange_id_seq RESTART WITH 1;
+
 INSERT INTO CryptoCoin (name, symbol, priceUsd, marketCap) VALUES
 ('Bitcoin', 'BTC', 67000.50, 1320000000000),
 ('Ethereum', 'ETH', 3500.25, 420000000000),
@@ -51,36 +54,40 @@ INSERT INTO Exchange (name, country, website) VALUES
 ('OKX', 'Global', 'https://www.okx.com'),
 ('Bitfinex', 'British Virgin Islands', 'https://www.bitfinex.com');
 
-INSERT INTO ExchangeCrypto (exchange_id, crypto_id) VALUES
+INSERT INTO ExchangeCrypto (exchange_id, crypto_id)
 -- Binance
-(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9), (1, 10),
-
+SELECT e.id, c.id FROM Exchange e, CryptoCoin c
+WHERE e.name = 'Binance' AND c.name IN ('Bitcoin', 'Ethereum', 'Cardano', 'Solana', 'Polkadot', 'Ripple', 'Dogecoin', 'Litecoin', 'Chainlink', 'Polygon')
+UNION ALL
 -- Coinbase
-(2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6),
-
+SELECT e.id, c.id FROM Exchange e, CryptoCoin c
+WHERE e.name = 'Coinbase' AND c.name IN ('Bitcoin', 'Ethereum', 'Cardano', 'Solana', 'Polkadot', 'Ripple')
+UNION ALL
 -- Kraken
-(3, 1), (3, 2), (3, 4), (3, 6), (3, 8), (3, 9),
-
+SELECT e.id, c.id FROM Exchange e, CryptoCoin c
+WHERE e.name = 'Kraken' AND c.name IN ('Bitcoin', 'Ethereum', 'Solana', 'Ripple', 'Litecoin', 'Chainlink')
+UNION ALL
 -- Huobi
-(4, 1), (4, 2), (4, 3), (4, 4), (4, 6), (4, 7),
-
+SELECT e.id, c.id FROM Exchange e, CryptoCoin c
+WHERE e.name = 'Huobi' AND c.name IN ('Bitcoin', 'Ethereum', 'Cardano', 'Solana', 'Ripple', 'Dogecoin')
+UNION ALL
 -- KuCoin
-(5, 1), (5, 2), (5, 3), (5, 4), (5, 5), (5, 6), (5, 7), (5, 9), (5, 10),
-
+SELECT e.id, c.id FROM Exchange e, CryptoCoin c
+WHERE e.name = 'KuCoin' AND c.name IN ('Bitcoin', 'Ethereum', 'Cardano', 'Solana', 'Polkadot', 'Ripple', 'Dogecoin', 'Chainlink', 'Polygon')
+UNION ALL
 -- Bybit
-(6, 1), (6, 2), (6, 4), (6, 6),
-
+SELECT e.id, c.id FROM Exchange e, CryptoCoin c
+WHERE e.name = 'Bybit' AND c.name IN ('Bitcoin', 'Ethereum', 'Solana', 'Ripple')
+UNION ALL
 -- OKX
-(7, 1), (7, 2), (7, 3), (7, 4), (7, 5), (7, 6),
-
+SELECT e.id, c.id FROM Exchange e, CryptoCoin c
+WHERE e.name = 'OKX' AND c.name IN ('Bitcoin', 'Ethereum', 'Cardano', 'Solana', 'Polkadot', 'Ripple')
+UNION ALL
 -- Bitfinex
-(8, 1), (8, 2), (8, 4), (8, 9);
+SELECT e.id, c.id FROM Exchange e, CryptoCoin c
+WHERE e.name = 'Bitfinex' AND c.name IN ('Bitcoin', 'Ethereum', 'Solana', 'Chainlink');
 
 COMMIT;
-
-SELECT 'CryptoCoins count: ' || COUNT(*) FROM CryptoCoin;
-SELECT 'Exchanges count: ' || COUNT(*) FROM Exchange;
-SELECT 'Exchange-Crypto links: ' || COUNT(*) FROM ExchangeCrypto;
 ```
 
 ### Задание 4
