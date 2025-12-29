@@ -1,4 +1,3 @@
-# Простой скрипт для заполнения БД
 $env:PGPASSWORD = "1230"
 $psql = "C:\Program Files\PostgreSQL\18\bin\psql.exe"
 

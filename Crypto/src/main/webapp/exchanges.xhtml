@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>CryptoLab - Exchanges</title>
+</h:head>
+<h:body>
+    <h1>Cryptocurrency Exchanges</h1>
+
+    <h:link value="Back to Cryptocurrencies" outcome="index" />
+
+    <h2>Add New Exchange</h2>
+    <h:form>
+        <h:panelGrid columns="3">
+            <h:outputLabel value="Name:" />
+            <h:inputText value="#{exchangeBean.exchange.name}" required="true" />
+            <h:message for="name" style="color:red" />
+
+            <h:outputLabel value="Country:" />
+            <h:inputText value="#{exchangeBean.exchange.country}" />
+            <h:message for="country" />
+
+            <h:outputLabel value="Website:" />
+            <h:inputText value="#{exchangeBean.exchange.website}" />
+            <h:message for="website" />
+        </h:panelGrid>
+        <h:commandButton value="Add Exchange" action="#{exchangeBean.addExchange}" />
+    </h:form>
+
+    <h2>All Exchanges</h2>
+    <h:dataTable value="#{exchangeBean.exchangeList}" var="ex" border="1">
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            #{ex.name}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Country</f:facet>
+            #{ex.country}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Website</f:facet>
+            <h:outputLink value="#{ex.website}" target="_blank">
+                #{ex.website}
+            </h:outputLink>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Actions</f:facet>
+            <h:commandButton value="Delete" action="#{exchangeBean.deleteExchange(ex)}" />
+        </h:column>
+    </h:dataTable>
+</h:body>
+</html>

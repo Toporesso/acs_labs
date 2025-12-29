@@ -68,7 +68,6 @@ public class CryptoCoinController {
         return "redirect:/coins";
     }
 
-    // Вспомогательный метод для обновления связей с биржами
     private void updateCoinExchanges(CryptoCoin coin, List<Long> exchangeIds) {
         if (exchangeIds != null) {
             Set<Exchange> exchanges = exchangeIds.stream()

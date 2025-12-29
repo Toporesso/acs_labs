@@ -26,7 +26,6 @@ public class Exchange {
     )
     private Set<CryptoCoin> cryptos = new HashSet<>();
 
-    // Конструкторы
     public Exchange() {}
 
     public Exchange(String name, String country, String website) {
@@ -35,7 +34,6 @@ public class Exchange {
         this.website = website;
     }
 
-    // Геттеры и сеттеры
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

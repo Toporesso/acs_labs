@@ -11,11 +11,15 @@
         <class>org.example.crypto.model.Exchange</class>
 
         <properties>
+<!--            <property name="jakarta.persistence.schema-generation.database.action" value="none"/> -->
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/cryptodb"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
             <property name="jakarta.persistence.jdbc.password" value="1230"/>
+
+            <property name="jakarta.persistence.cascade.persist" value="MERGE,PERSIST"/>
+            <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>

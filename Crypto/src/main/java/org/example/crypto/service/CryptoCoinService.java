@@ -30,6 +30,7 @@ public class CryptoCoinService {
     }
 
     public List<CryptoCoin> getAll() {
-        return em.createQuery("SELECT c FROM CryptoCoin c", CryptoCoin.class).getResultList();
+        return em.createQuery("SELECT DISTINCT c FROM CryptoCoin c LEFT JOIN FETCH c.exchanges",
+                CryptoCoin.class).getResultList();
     }
 }

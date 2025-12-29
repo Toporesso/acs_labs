@@ -28,7 +28,6 @@ public class CryptoCoin {
     @ManyToMany(mappedBy = "cryptos")
     private Set<Exchange> exchanges = new HashSet<>();
 
-    // Конструкторы
     public CryptoCoin() {}
 
     public CryptoCoin(String name, String symbol, BigDecimal priceUsd, BigDecimal marketCap) {
@@ -38,7 +37,6 @@ public class CryptoCoin {
         this.marketCap = marketCap;
     }
 
-    // Геттеры и сеттеры
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

@@ -62,7 +62,6 @@ public class CryptoCoinService {
             existing.getExchanges().clear();
             existing.getExchanges().addAll(coin.getExchanges());
 
-            // Добавляем монету к новым биржам
             for (Exchange newExchange : coin.getExchanges()) {
                 newExchange.getCryptos().add(existing);
                 exchangeRepository.save(newExchange);
