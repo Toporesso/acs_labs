@@ -2,135 +2,53 @@
 
 ### Задание 1
 
-Запуск glassfish:
-
-<img width="1518" height="748" alt="image" src="https://github.com/user-attachments/assets/21bed5c2-e0c4-43cc-a895-58974e367112" />
-
-Панель glassfish:
-
-<img width="1516" height="653" alt="image" src="https://github.com/user-attachments/assets/3d90e13d-7f30-4cf6-a298-e3b75ce90c48" />
+Создал модель крипто-бирж и монет со связями на основе первой работы. Написал SQL-скрипты для создания таблиц и заполнения тестовыми данными.
 
 ### Задание 2
 
-Использовалась postgreSQL
-
-Панель pgAdmin 4:
-
-<img width="1225" height="540" alt="image" src="https://github.com/user-attachments/assets/dd9f7d44-6cc3-4463-972b-d771225d1ae6" />
+Разработал JPA-сущности Exchange и CryptoCoin с аннотациями Hibernate для маппинга таблиц и отношений многие-ко-многим.
 
 ### Задание 3
 
-В качестве темы была взята предметная область: Криптовалюта. Существует 2 сущности: Монеты и Биржи.
-
-Скрипт для заполнения БД:
-
-```
-TRUNCATE TABLE ExchangeCrypto CASCADE;
-TRUNCATE TABLE Exchange CASCADE;
-TRUNCATE TABLE CryptoCoin CASCADE;
-
-ALTER SEQUENCE IF EXISTS cryptocoin_id_seq RESTART WITH 1;
-ALTER SEQUENCE IF EXISTS exchange_id_seq RESTART WITH 1;
-
-INSERT INTO CryptoCoin (name, symbol, priceUsd, marketCap) VALUES
-('Bitcoin', 'BTC', 67000.50, 1320000000000),
-('Ethereum', 'ETH', 3500.25, 420000000000),
-('Cardano', 'ADA', 0.45, 16000000000),
-('Solana', 'SOL', 170.80, 75000000000),
-('Polkadot', 'DOT', 7.20, 9200000000),
-('Ripple', 'XRP', 0.52, 28000000000),
-('Dogecoin', 'DOGE', 0.15, 21000000000),
-('Litecoin', 'LTC', 82.30, 6100000000),
-('Chainlink', 'LINK', 14.75, 8500000000),
-('Polygon', 'MATIC', 0.72, 7100000000);
-
-INSERT INTO Exchange (name, country, website) VALUES
-('Binance', 'Global', 'https://www.binance.com'),
-('Coinbase', 'USA', 'https://www.coinbase.com'),
-('Kraken', 'USA', 'https://www.kraken.com'),
-('Huobi', 'Singapore', 'https://www.huobi.com'),
-('KuCoin', 'Seychelles', 'https://www.kucoin.com'),
-('Bybit', 'Singapore', 'https://www.bybit.com'),
-('OKX', 'Global', 'https://www.okx.com'),
-('Bitfinex', 'British Virgin Islands', 'https://www.bitfinex.com');
-
-INSERT INTO ExchangeCrypto (exchange_id, crypto_id)
--- Binance
-SELECT e.id, c.id FROM Exchange e, CryptoCoin c
-WHERE e.name = 'Binance' AND c.name IN ('Bitcoin', 'Ethereum', 'Cardano', 'Solana', 'Polkadot', 'Ripple', 'Dogecoin', 'Litecoin', 'Chainlink', 'Polygon')
-UNION ALL
--- Coinbase
-SELECT e.id, c.id FROM Exchange e, CryptoCoin c
-WHERE e.name = 'Coinbase' AND c.name IN ('Bitcoin', 'Ethereum', 'Cardano', 'Solana', 'Polkadot', 'Ripple')
-UNION ALL
--- Kraken
-SELECT e.id, c.id FROM Exchange e, CryptoCoin c
-WHERE e.name = 'Kraken' AND c.name IN ('Bitcoin', 'Ethereum', 'Solana', 'Ripple', 'Litecoin', 'Chainlink')
-UNION ALL
--- Huobi
-SELECT e.id, c.id FROM Exchange e, CryptoCoin c
-WHERE e.name = 'Huobi' AND c.name IN ('Bitcoin', 'Ethereum', 'Cardano', 'Solana', 'Ripple', 'Dogecoin')
-UNION ALL
--- KuCoin
-SELECT e.id, c.id FROM Exchange e, CryptoCoin c
-WHERE e.name = 'KuCoin' AND c.name IN ('Bitcoin', 'Ethereum', 'Cardano', 'Solana', 'Polkadot', 'Ripple', 'Dogecoin', 'Chainlink', 'Polygon')
-UNION ALL
--- Bybit
-SELECT e.id, c.id FROM Exchange e, CryptoCoin c
-WHERE e.name = 'Bybit' AND c.name IN ('Bitcoin', 'Ethereum', 'Solana', 'Ripple')
-UNION ALL
--- OKX
-SELECT e.id, c.id FROM Exchange e, CryptoCoin c
-WHERE e.name = 'OKX' AND c.name IN ('Bitcoin', 'Ethereum', 'Cardano', 'Solana', 'Polkadot', 'Ripple')
-UNION ALL
--- Bitfinex
-SELECT e.id, c.id FROM Exchange e, CryptoCoin c
-WHERE e.name = 'Bitfinex' AND c.name IN ('Bitcoin', 'Ethereum', 'Solana', 'Chainlink');
-
-COMMIT;
-```
+Реализовал сервисы ExchangeService и CryptoCoinService с транзакционными методами для CRUD операций и управления связями между сущностями.
 
 ### Задание 4
 
-Реализованы Java Beans (CryptoCoin, Exchange) с JPA-аннотациями. Настроены связи @ManyToMany через таблицу ExchangeCrypto.
+Создал Spring MVC контроллеры с Thymeleaf шаблонами для отображения списков бирж/монет, форм добавления/редактирования и удаления записей.
 
 ### Задание 5
 
-Созданы EJB-компоненты CryptoCoinService и ExchangeService с CRUD-операциями. Используется EntityManager для работы с БД.
-
-### Задание 6
-
-Реализован веб-интерфейс на JSF с Facelets (index.xhtml, exchanges.xhtml). Подключены managed beans для отображения и редактирования данных.
-
-### Задание 7
-
 Запускаем проект и видим пустые таблицы:
 
-<img width="1089" height="432" alt="image" src="https://github.com/user-attachments/assets/c11465ef-ecda-40a7-acf9-34b1104aee8b" />
+<img width="308" height="95" alt="image" src="https://github.com/user-attachments/assets/4e8a788c-d8bd-4d47-9d7a-446c3c0bb9e1" />
 
-<img width="407" height="370" alt="image" src="https://github.com/user-attachments/assets/69e8afce-8773-4772-9c8d-a37d73a8c497" />
+<img width="329" height="101" alt="image" src="https://github.com/user-attachments/assets/ca873deb-74a1-465f-a129-d89aa4194092" />
 
 Для начала убидимся в правильности работы
 
 Создадим биржу через форму:
 
-<img width="254" height="161" alt="image" src="https://github.com/user-attachments/assets/e9937e3f-ea86-44cb-9a06-7de7457a51dc" />
+<img width="275" height="171" alt="image" src="https://github.com/user-attachments/assets/60a9c842-a4e8-445d-a58f-924f942dd9b1" />
 
 Получим:
 
-<img width="284" height="121" alt="image" src="https://github.com/user-attachments/assets/96632459-8c18-473c-98af-960d9db9e045" />
+<img width="504" height="158" alt="image" src="https://github.com/user-attachments/assets/89ece568-7fd0-48bc-a3bc-b82a7acc8281" />
 
 Создадим монету через форму:
 
-<img width="359" height="224" alt="image" src="https://github.com/user-attachments/assets/26ba0872-af89-4dfc-80b8-b00b766f19b5" />
+<img width="291" height="272" alt="image" src="https://github.com/user-attachments/assets/107bda83-8371-42b3-8289-ff7d15f5f9de" />
 
 Получим:
 
-<img width="1053" height="153" alt="image" src="https://github.com/user-attachments/assets/fb02813a-14d9-42ae-b8c7-87df32f6e232" />
+<img width="557" height="159" alt="image" src="https://github.com/user-attachments/assets/9a0ea759-5e44-47fa-a55f-913ec7efae8e" />
 
-Теперь заполним таблицу через SQL файл и получим:
+И
 
-<img width="1051" height="1290" alt="image" src="https://github.com/user-attachments/assets/26cb8ac1-a848-4485-99ce-c9722a0006f8" />
+<img width="561" height="172" alt="image" src="https://github.com/user-attachments/assets/f8f0c42d-f3d7-4b5f-acad-acfb1d8fe488" />
 
-<img width="347" height="441" alt="image" src="https://github.com/user-attachments/assets/77fc4d75-ece0-4b8a-b95f-aa93b3422c6c" />
+Теперь заполним таблицу через SQL файл с запуском .ps1 и получим:
+
+<img width="1453" height="372" alt="image" src="https://github.com/user-attachments/assets/ad14aa5a-f3fd-4a0d-8716-1a938377bba9" />
+
+<img width="1010" height="371" alt="image" src="https://github.com/user-attachments/assets/8c51eaba-38e0-4f54-9e2a-058f91cd1780" />
 
